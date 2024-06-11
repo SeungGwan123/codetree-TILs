@@ -20,6 +20,7 @@ void big_square(vector<pair<int,int>> v,set<pair<int,int>> s){
             check = false;
             break;
         }
+        if(temp_s.count({a,b})==1)continue;
         temp_v.push_back({a,b});
         temp_s.insert({a,b});
     }
@@ -41,6 +42,7 @@ void big_square(vector<pair<int,int>> v,set<pair<int,int>> s){
             check = false;
             break;
         }
+        if(t_s.count({a,b})==1)continue;
         t_v.push_back({a,b});
         t_s.insert({a,b});
     }
