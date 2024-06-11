@@ -36,7 +36,7 @@ void square(vector<pair<int,int>> v,set<pair<int,int>> s,int value,int start_x,i
     temp_x = start_x;
     temp_y = start_y;
     for(int i=0;i<vv.size();i++){
-        if(v[i].second+1>=n){
+        if(v[i].second+1>=m){
             check = false;
             break;
         }
@@ -75,6 +75,7 @@ int main() {
             square(v,s,board[i][j],i,j);
         }
     }
+    //cout<<pq.size()<<endl;
     vector<tuple<int,int,int,int,int>> check_value;
     check_value.push_back(pq.top());
     pq.pop();
@@ -91,7 +92,7 @@ int main() {
                 result = max(result,value+c_value);
                 // cout<<value<<" "<<c_value<<endl;
                 // cout<<start_x<<" "<<start_y<<" "<<end_x<<" "<<end_y<<endl;
-                // cout<<start_a<<" "<<start_b<<" "<<end_a<<" "<<end_b;
+                // cout<<start_a<<" "<<start_b<<" "<<end_a<<" "<<end_b<<endl;
                 //check = false;
                 //break;
             }
