@@ -26,8 +26,10 @@ int main() {
         for(int j=0;j<n;j++){
             int now = temp[i][j];
             if(j+t>=n){
-                if(i==0) v[1][(j+t)%n] = now;
-                else v[0][(j+t)%n] = now;
+                if((j+t)/n%2==1){
+                    if(i==0) v[1][(j+t)%n] = now;
+                    else v[0][(j+t)%n] = now;
+                }else v[i][(j+t)%n] = now;
             }else v[i][j+t] = now;
         }
     }
