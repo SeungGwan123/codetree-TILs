@@ -23,43 +23,44 @@ int main() {
         v[line].push_back(temp);
         if(i%m==m-1)line++;
     }
-    cin>>num>>d;
-    q%=m;
-    num--;
-    bool dir = false;
-    if(d=='L') dir = true;
-    v[num] = move(v[num],q,dir);
-    bool up_dir = !dir;
-    int up_line = num;
-    bool down_dir = !dir;
-    int down_line = num;
-    while(up_line>0){
-        bool check = false;
-        for(int i=0;i<v[up_line].size();i++){
-            if(v[up_line][i]==v[up_line-1][i]){
-                check = true;
-                break;
+    for(int Q=0;Q<q;Q++){
+        cin>>num>>d;
+        num--;
+        bool dir = false;
+        if(d=='L') dir = true;
+        v[num] = move(v[num],num,dir);
+        bool up_dir = !dir;
+        int up_line = num;
+        bool down_dir = !dir;
+        int down_line = num;
+        while(up_line>0){
+            bool check = false;
+            for(int i=0;i<v[up_line].size();i++){
+                if(v[up_line][i]==v[up_line-1][i]){
+                    check = true;
+                    break;
+                }
             }
+            if(check){
+                v[up_line-1] = move(v[up_line-1],num,up_dir);
+                up_dir = !up_dir;
+                up_line--;
+            }else break;
         }
-        if(check){
-            v[up_line-1] = move(v[up_line-1],q,up_dir);
-            up_dir = !up_dir;
-            up_line--;
-        }else break;
-    }
-    while(down_line<n-1){
-        bool check = false;
-        for(int i=0;i<v[down_line].size();i++){
-            if(v[down_line][i]==v[down_line+1][i]){
-                check = true;
-                break;
+        while(down_line<n-1){
+            bool check = false;
+            for(int i=0;i<v[down_line].size();i++){
+                if(v[down_line][i]==v[down_line+1][i]){
+                    check = true;
+                    break;
+                }
             }
+            if(check){
+                v[down_line+1] = move(v[down_line+1],num,down_dir);
+                down_dir = !down_dir;
+                down_line++;
+            }else break;
         }
-        if(check){
-            v[down_line+1] = move(v[down_line+1],q,down_dir);
-            down_dir = !down_dir;
-            down_line++;
-        }else break;
     }
     for(auto iter : v){
         for(auto element : iter){
