@@ -28,7 +28,7 @@ int main() {
         num--;
         bool dir = false;
         if(d=='L') dir = true;
-        v[num] = move(v[num],num,dir);
+        v[num] = move(v[num],1,dir);
         bool up_dir = !dir;
         int up_line = num;
         bool down_dir = !dir;
@@ -42,7 +42,7 @@ int main() {
                 }
             }
             if(check){
-                v[up_line-1] = move(v[up_line-1],num,up_dir);
+                v[up_line-1] = move(v[up_line-1],1,up_dir);
                 up_dir = !up_dir;
                 up_line--;
             }else break;
@@ -56,7 +56,7 @@ int main() {
                 }
             }
             if(check){
-                v[down_line+1] = move(v[down_line+1],num,down_dir);
+                v[down_line+1] = move(v[down_line+1],1,down_dir);
                 down_dir = !down_dir;
                 down_line++;
             }else break;
