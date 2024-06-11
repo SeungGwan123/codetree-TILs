@@ -20,7 +20,7 @@ int main() {
         for(int j=0;j<n;j++){
             int now = v[i][j];
             int time = j+t;
-            temp_v[time/n%3][time%n] = now;
+            temp_v[(i+time/n)%3][time%n] = now;
         }
     }
     for(auto iter : temp_v){
