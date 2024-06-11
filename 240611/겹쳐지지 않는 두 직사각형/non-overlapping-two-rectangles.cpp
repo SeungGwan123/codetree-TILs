@@ -55,7 +55,7 @@ void square(vector<pair<int,int>> v,set<pair<int,int>> s,int value,int start_x,i
     }
 }
 int main() {
-    int result = 0;
+    int result = -2000;
     cin>>n>>m;
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
