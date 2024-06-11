@@ -68,7 +68,7 @@ int main() {
             big_square(v,s);
         }
     }
-    if(!pq.empty()&&pq.top()<0) cout<<"-1";
+    if(!pq.empty()||pq.top()<0) cout<<"-1";
     else cout<<pq.top();
     return 0;
 }
