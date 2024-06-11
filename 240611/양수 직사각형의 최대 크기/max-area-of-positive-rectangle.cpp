@@ -16,7 +16,7 @@ void big_square(vector<pair<int,int>> v,set<pair<int,int>> s){
             check = false;
             break;
         }
-        if(board[a][b]<0){
+        if(board[a][b]<=0){
             check = false;
             break;
         }
@@ -25,7 +25,7 @@ void big_square(vector<pair<int,int>> v,set<pair<int,int>> s){
         temp_s.insert({a,b});
     }
     if(check){
-        pq.push(temp_s.size());
+        pq.push(temp_v.size());
         big_square(temp_v,temp_s);
     }
     vector<pair<int,int>> t_v = v;
@@ -38,7 +38,7 @@ void big_square(vector<pair<int,int>> v,set<pair<int,int>> s){
             check = false;
             break;
         }
-        if(board[a][b]<0){
+        if(board[a][b]<=0){
             check = false;
             break;
         }
@@ -47,7 +47,7 @@ void big_square(vector<pair<int,int>> v,set<pair<int,int>> s){
         t_s.insert({a,b});
     }
     if(check){
-        pq.push(t_s.size());
+        pq.push(t_v.size());
         big_square(t_v,t_s);
     }
 }
@@ -62,7 +62,7 @@ int main() {
     }
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
-            if(board[i][j]<0)continue;
+            if(board[i][j]<=0)continue;
             pq.push(1);
             vector<pair<int,int>> v = {{i,j}};
             set<pair<int,int>> s = {{i,j}};
