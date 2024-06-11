@@ -63,6 +63,7 @@ int main() {
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
             if(board[i][j]<0)continue;
+            pq.push(1);
             vector<pair<int,int>> v = {{i,j}};
             set<pair<int,int>> s = {{i,j}};
             big_square(v,s);
