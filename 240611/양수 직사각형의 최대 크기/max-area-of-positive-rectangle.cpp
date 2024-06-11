@@ -33,7 +33,7 @@ void big_square(vector<pair<int,int>> v,set<pair<int,int>> s){
     for(int i=0;i<v.size();i++){
         int a = v[i].first;
         int b = v[i].second+1;
-        if(b>=n) {
+        if(b>=m) {
             check = false;
             break;
         }
