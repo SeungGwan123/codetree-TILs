@@ -19,7 +19,7 @@ public class Main {
             k = Math.max(k,k_length);
         }
 
-        for(int i=0;i<k;i++){    
+        for(int i=0;i<=k;i++){    
             List<List<Integer>> temp_list = new ArrayList<>();
             for(int t=0;t<10;t++){
                 temp_list.add(new ArrayList<Integer>());
