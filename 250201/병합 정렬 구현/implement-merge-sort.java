@@ -2,16 +2,15 @@ import java.util.*;
 
 public class Main {
 
-    public static List<Integer> merge_sort(List<Integer> list,int low,int high){
+    public static void merge_sort(List<Integer> list,int low,int high){
         int mid = (low+high)/2;
         if(low<high){
-            list = merge_sort(list,low,mid);
-            list = merge_sort(list,mid+1,high);
-            list = merge(list,low,mid,high);
+            merge_sort(list,low,mid);
+            merge_sort(list,mid+1,high);
+            merge(list,low,mid,high);
         }
-        return list;
     }
-    public static List<Integer> merge(List<Integer> list,int low, int mid,int high){
+    public static void merge(List<Integer> list,int low, int mid,int high){
         int i = low;
         int j = mid+1;
         int k = low;
@@ -36,7 +35,6 @@ public class Main {
         for(int m=0;m<merge_list.size();m++){
             list.set(low+m,merge_list.get(m));
         }
-        return list;
     } 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -48,7 +46,7 @@ public class Main {
             list.add(sc.nextInt());
         }
 
-        list = merge_sort(list,0,list.size()-1);
+        merge_sort(list,0,list.size()-1);
 
         for(int num : list){
             System.out.print(num+ " ");
