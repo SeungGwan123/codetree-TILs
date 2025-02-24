@@ -17,6 +17,7 @@ public class Main {
             int block = i;
             while(block>=3){
                 three += (list.get(i-block)*2%divide);
+                three %= divide;
                 block-=1;
             }
             int now = (one+two+three)%divide;
