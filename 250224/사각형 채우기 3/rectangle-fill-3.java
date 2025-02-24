@@ -15,10 +15,9 @@ public class Main {
             int two = list.get(i-2)*3%divide;
             int three = 0;
             int block = i;
-            while(block>=3){
-                three += (list.get(i-block)*2%divide);
+            for(int j=0;j<=i-3;j++){
+                three += (list.get(j)*2%divide);
                 three %= divide;
-                block-=1;
             }
             int now = (one+two+three)%divide;
             list.add(now);
