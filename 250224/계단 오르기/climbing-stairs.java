@@ -12,8 +12,9 @@ public class Main{
         list.add(1);
         list.add(1);
         for(int i=4;i<=n;i++){
-            list.add(list.get(i-2)+list.get(i-3));
+            list.add((list.get(i-2)+list.get(i-3))%10007);
         }
-        System.out.println(list.get(n)%10007);
+        int result = list.get(n) % 10007;
+        System.out.println(result);
     }
 }
