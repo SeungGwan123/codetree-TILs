@@ -6,7 +6,7 @@ public class Main {
         int n = sc.nextInt();
         int divide = 1000000007;
         List<Integer> list = new ArrayList<>();
-        list.add(0);
+        list.add(1);
         list.add(2);
         list.add(7);
         list.add(22);
@@ -19,7 +19,7 @@ public class Main {
                 three = (three+list.get(i-block)*2)%divide;
                 block-=1;
             }
-            int now = (one+two+three+2)%divide;
+            int now = (one+two+three)%divide;
             list.add(now);
         }
         System.out.println(list.get(n));
