@@ -14,7 +14,7 @@ public class Main {
             int one = list.get(i-1)*2%divide;
             int two = list.get(i-2)*3%divide;
             int three = 0;
-            int block = i;
+            int block = i-1;
             while(block>=3){
                 three = (three+list.get(i-block)*2)%divide;
                 block-=1;
