@@ -14,6 +14,6 @@ public class Main{
         for(int i=4;i<=n;i++){
             list.add(list.get(i-2)+list.get(i-3));
         }
-        System.out.println(list.get(n));
+        System.out.println(list.get(n)%10007);
     }
 }
