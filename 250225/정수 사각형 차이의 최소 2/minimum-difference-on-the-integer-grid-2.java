@@ -30,13 +30,13 @@ public class Main {
                     }else dp[i][j] = up;
                 }
 
-                for(int a=0;a<n;a++){
-                    for(int b=0;b<n;b++){
-                        System.out.print(dp[a][b][0]+" "+dp[a][b][1]+"  ");
-                    }
-                    System.out.println();
-                }
-                System.out.println();
+                // for(int a=0;a<n;a++){
+                //     for(int b=0;b<n;b++){
+                //         System.out.print(dp[a][b][0]+" "+dp[a][b][1]+"  ");
+                //     }
+                //     System.out.println();
+                // }
+                // System.out.println();
             }
         }
         System.out.println(dp[n-1][n-1][1]-dp[n-1][n-1][0]);
