@@ -23,7 +23,7 @@ public class Main {
         }
         for(int i=0;i<m;i++){
             if(hash.containsKey(queries[i])){
-                System.out.print(hash.get(arr[i])+" ");
+                System.out.print(hash.get(queries[i])+" ");
             }else System.out.print(0+" ");
         }
     }
