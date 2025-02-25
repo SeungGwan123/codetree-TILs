@@ -22,12 +22,14 @@ public class Main {
                     dp[i][j][0] = Math.min(dp[i-1][j][0],grid[i][j]);
                     dp[i][j][1] = Math.max(dp[i-1][j][1],grid[i][j]);
                 }else{
-                    int now = grid[i][j];
-                    int[] left = new int[]{Math.min(dp[i][j-1][0],now),Math.max(dp[i][j-1][1],now)};
-                    int[] up = new int[]{Math.min(dp[i-1][j][0],now),Math.max(dp[i-1][j][1],now)};
-                    if(left[1]-left[0]<up[1]-up[0]){
-                        dp[i][j] = left;
-                    }else dp[i][j] = up;
+                    // int now = grid[i][j];
+                    // int[] left = new int[]{Math.min(dp[i][j-1][0],now),Math.max(dp[i][j-1][1],now)};
+                    // int[] up = new int[]{Math.min(dp[i-1][j][0],now),Math.max(dp[i-1][j][1],now)};
+                    // if(left[1]-left[0]<up[1]-up[0]){
+                    //     dp[i][j] = left;
+                    // }else dp[i][j] = up;
+                    dp[i][j][0] = Math.min(Math.max(dp[i][j-1][0],dp[i-1][j][0]),grid[i][j]);
+                    dp[i][j][1] = Math.max(Math.min(dp[i][j-1][1],dp[i-1][j][1]),grid[i][j]);
                 }
 
                 // for(int a=0;a<n;a++){
