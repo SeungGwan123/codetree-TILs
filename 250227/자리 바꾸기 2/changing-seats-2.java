@@ -30,14 +30,27 @@ public class Main {
             seat[first] = seat[second];
             seat[second] = temp;
 
-            if(!set.contains(seat[first]+"-"+first)){
+            int first_size = set.size();
+            set.add(seat[first]+"-"+first);
+            if(first_size<set.size()){
                 set.add(seat[first]+"-"+first);
                 s_num[seat[first]]++;
             }
-            if(!set.contains(seat[second]+"-"+second)){
+
+            int second_size = set.size();
+            set.add(seat[second]+"-"+second);
+            if(second_size<set.size()){
                 set.add(seat[second]+"-"+second);
                 s_num[seat[second]]++;
             }
+            // if(!set.contains(seat[first]+"-"+first)){
+            //     set.add(seat[first]+"-"+first);
+            //     s_num[seat[first]]++;
+            // }
+            // if(!set.contains(seat[second]+"-"+second)){
+            //     set.add(seat[second]+"-"+second);
+            //     s_num[seat[second]]++;
+            // }
         }
         for(int i=0;i<n;i++){
             System.out.println(s_num[i]);
