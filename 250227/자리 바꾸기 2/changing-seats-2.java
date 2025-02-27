@@ -15,10 +15,11 @@ public class Main {
         int[] seat = new int[n];
         int[] s_num = new int[n];
 
-        HashSet<String> set = new HashSet<>();
+        HashSet<Integer>[] set = new HashSet[n];
 
         for(int i=0;i<n;i++){
-            set.add(i+"-"+i);
+            set[i] = new HashSet<>();
+            set[i].add(i);
             seat[i] = i;
             s_num[i] = 1;
         }
@@ -30,12 +31,12 @@ public class Main {
             seat[first] = seat[second];
             seat[second] = temp;
 
-            if(!set.contains(seat[first]+"-"+first)){
-                set.add(seat[first]+"-"+first);
+            if(!set[seat[first]].contains(first)){
+                set[seat[first]].add(first);
                 s_num[seat[first]]++;
             }
-            if(!set.contains(seat[second]+"-"+second)){
-                set.add(seat[second]+"-"+second);
+            if(!set[seat[second]].contains(second)){
+                set[seat[second]].add(second);
                 s_num[seat[second]]++;
             }
         }
