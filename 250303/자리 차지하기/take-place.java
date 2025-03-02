@@ -22,6 +22,6 @@ public class Main {
                 else set.remove(temp_seat);
             }       
         }
-        System.out.println(m);
+        System.out.println(n);
     }
 }
