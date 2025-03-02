@@ -17,10 +17,11 @@ public class Main {
                 Integer temp_seat = set.lower(seat);
                 if(temp_seat==null) {
                     System.out.println(i);
-                    break;
+                    return;
                 }
                 else set.remove(temp_seat);
             }       
         }
+        System.out.println(m);
     }
 }
