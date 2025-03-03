@@ -17,7 +17,8 @@ public class Main {
                 seq.add(n-num);
                 seq.add(num);
                 hash.put(n-num,1);
-                hash.put(num,1);
+                if(n-num==num) hash.put(num,2);
+                else hash.put(num,1);
             }else{
 
                 if(high==null) high = n-num;
