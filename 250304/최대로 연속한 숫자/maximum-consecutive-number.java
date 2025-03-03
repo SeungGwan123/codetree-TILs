@@ -7,26 +7,30 @@ public class Main {
         int m = sc.nextInt();
         int[] removals = new int[m];
         TreeSet<Integer> set = new TreeSet<>();
-        
+        TreeSet<Integer> seq = new TreeSet<>();
         for (int i = 0; i < m; i++) {
-            int nm = sc.nextInt();
-            set.add(nm);
-            int result = 0;    
-            Iterator<Integer> iter = set.iterator();
-            while(iter.hasNext()){
-                int num = iter.next();
-                //System.out.println(num);
-                Integer high = set.higher(num);
-                Integer low = set.lower(num);
-                if(high==null) high = n-num;
-                else high -= (num+1);
+            int num = sc.nextInt();
+            
+             
+            
+            Integer high = set.higher(num);
+            Integer low = set.lower(num);
+            if(high==null&&low==null){
+                seq.add(n-num);
+                seq.add(num);
+            }else{
 
-                if(low==null) low = num;
-                else low = num-low-1;
+            if(high==null) high = n-num;
+            else high -= (num+1);
 
-                result = Math.max(Math.max(high,low),result);
+            if(low==null) low = num;
+            else low = num-low-1;
+            seq.remove(high+low+1);
+            seq.add(high);
+            seq.add(low);
             }
-            System.out.println(result);
+            set.add(num);
+            System.out.println(seq.last());
         }
         
     }
