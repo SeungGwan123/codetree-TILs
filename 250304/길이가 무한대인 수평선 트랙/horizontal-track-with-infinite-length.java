@@ -29,14 +29,16 @@ public class Main {
             speed[i] = sc.nextInt();
             run now = new run(start[i],speed[i]);
             set.add(now);
-            run before = set.lower(now);
-            run next = set.higher(now);
-            if(before!=null){
-                if(before.speed*t+before.loc>=now.speed*t+now.loc) result--;
+        }
+        run before = set.first();
+        while(before!=null){
+            run now = set.higher(before);
+            if(now==null) {
+                before=null;
+                continue;
             }
-            if(next!=null){
-                if(next.speed*t+next.loc<=now.speed*t+now.loc) result--;
-            }
+            if(before.speed*t+before.loc>=now.speed*t+now.loc) result--;
+            before = now;
         }
         System.out.println(result);
     }
