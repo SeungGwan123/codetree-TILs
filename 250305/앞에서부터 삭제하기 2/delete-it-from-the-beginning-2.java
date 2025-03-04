@@ -18,8 +18,8 @@ public class Main {
             pq.add(now);
             result+=now;
 
-            int cal = result - pq.peek();
-            average = Math.max(cal/(pq.size()-1),average);
+            double cal = result - pq.peek();
+            average = Math.max((double)cal/(pq.size()-1),average);
         }
         DecimalFormat df = new DecimalFormat("0.00");
         System.out.println(df.format(average));
