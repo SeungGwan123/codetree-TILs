@@ -13,7 +13,7 @@ public class Main {
         int result = arr[n-1];
         pq.add(result);
         double average = 0;
-        for(int i=n-2;i>=0;i--){
+        for(int i=n-2;i>0;i--){
             int now = arr[i];
             pq.add(now);
             result+=now;
