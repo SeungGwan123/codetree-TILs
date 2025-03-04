@@ -37,7 +37,16 @@ public class Main {
                 before=null;
                 continue;
             }
-            if(before.speed*t+before.loc>=now.speed*t+now.loc) result--;
+            if(before.speed<now.speed){
+                before = now;
+                continue;    
+            }
+            while((before.speed-now.speed)*t+before.loc>=now.loc) {
+                result--;
+                set.remove(before);
+                before = set.lower(before);
+                if(before==null) break;
+            }
             before = now;
         }
         System.out.println(result);
