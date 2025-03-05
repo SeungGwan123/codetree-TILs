@@ -51,7 +51,7 @@ public class Main {
             ticket now_ticket = tickets[now.arr_id];
             //System.out.println(now_ticket.i+" "+now_ticket.start+" "+now_ticket.end);
             int wait_time = time - now_ticket.start;
-            if(wait_time<0) wait_time = now_ticket.start;
+            if(wait_time<0) time = now_ticket.start;
             result = Math.max(result, wait_time);
             int ending = time+now_ticket.end;
             time = ending;
