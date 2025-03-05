@@ -9,25 +9,21 @@ public class Main {
         TreeSet<Integer> set = new TreeSet<>();
         for (int i = 0; i < n; i++) {
             points[i] = sc.nextInt();
-            map.put(points[i],i);
             set.add(points[i]);
+        }
+        Integer iter = set.first();
+        int j = 0;
+        while(iter!=null){
+            map.put(iter,j);
+            iter = set.higher(iter);
+            j++;
         }
         int[][] queries = new int[q][2];
         
         for (int i = 0; i < q; i++) {
-            queries[i][0] = sc.nextInt();
-            queries[i][1] = sc.nextInt();
-            int start = queries[i][0];
-            int end = queries[i][1];
-            int result = 0;
-            Integer now = set.ceiling(start);
-            if(now>=start&& now<=end) result++;
-            while(now<=end){
-                now = set.higher(now);
-                if(now==null) break;
-                if(now<=end) result++;
-            }
-            System.out.println(result);
+            // int start = sc.nextInt();
+            // int end = sc.nextInt();
+            System.out.println(-map.get(sc.nextInt())+map.get(sc.nextInt())+1);
         }
         
     }
