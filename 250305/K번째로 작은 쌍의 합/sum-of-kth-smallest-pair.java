@@ -4,7 +4,7 @@ class num implements Comparable<num>{
     int x;
     public num(int x,PriorityQueue<Integer> pq){
         this.x = x;
-        this.pq = pq;
+        this.pq = new PriorityQueue<>(pq);
     }
 
     @Override
@@ -29,12 +29,11 @@ public class Main {
         for (int i = 0; i < n; i++)
             temp_pq.add(sc.nextInt());
         for (int i = 0; i < m; i++){
-            PriorityQueue<Integer> newpq = new PriorityQueue<>(temp_pq);
-            pq.add(new num(sc.nextInt(),newpq));
+            //PriorityQueue<Integer> newpq = new PriorityQueue<>(temp_pq);
+            pq.add(new num(sc.nextInt(),temp_pq));
         }
         for(int i=0;i<k-1;i++){
             num now = pq.peek();
-            //System.out.println(now.pq.peek()+" "+now.x);
             if(now.pq.size()==1) pq.poll();
             else {
                 pq.poll();
