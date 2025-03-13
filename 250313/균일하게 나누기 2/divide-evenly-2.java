@@ -54,9 +54,11 @@ public class Main {
             double half_x = Math.abs((double)n/2-count_x);
             if(min_x>half_x){
                 min_x = half_x;
-                X = next.getKey() + 1;  
             } 
-            else break;
+            else {
+                X = next.getKey() - 1;  
+                break;
+            }
         }
         while(iter_y.hasNext()){
             Map.Entry<Integer,Integer> next = iter_y.next();
@@ -65,8 +67,10 @@ public class Main {
             // System.out.println(min_y+" "+half_y+" "+(double)(n/2));
             if(min_y>half_y) {
                 min_y = half_y;
-                Y = next.getKey() + 1;
-            }else break;
+            }else{
+                Y = next.getKey() - 1;
+                break;
+            } 
         }
         int[] min_dot = new int[4];
         for(int i=0;i<n;i++){
