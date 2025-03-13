@@ -51,7 +51,7 @@ public class Main {
         while(iter_x.hasNext()){
             Map.Entry<Integer,Integer> next = iter_x.next();
             count_x += next.getValue();
-            double half_x = Math.abs((double)(n/2)-count_x);
+            double half_x = Math.abs((double)n/2-count_x);
             if(min_x>half_x){
                 min_x = half_x;
                 X = next.getKey() + 1;  
