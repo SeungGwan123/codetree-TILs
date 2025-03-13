@@ -13,10 +13,10 @@ public class Main {
         int result = 100000;
         long count = 0;
         for(int i=0;i<n;i++){
-            count+=arr[++end];
-            if(count>=s){
-                result = Math.min(result, end - start + 1);
-                while(count>=s) count -= arr[start++];
+            count+=arr[i];
+            while(count>=s) {
+                result = Math.min(result, i - start + 1);
+                count -= arr[start++];
             }
         }
         if(result == 100000) System.out.println("-1");
