@@ -60,6 +60,7 @@ public class Main {
             end = set.higher(end);
             if(end!=null)end_y = new pair_y(end.x,end.y);
         }
-        System.out.println(result);
+        if(result == 10000000) System.out.println("-1");
+        else System.out.println(result);
     }
 }
