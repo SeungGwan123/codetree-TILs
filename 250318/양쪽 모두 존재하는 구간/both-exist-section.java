@@ -32,8 +32,8 @@ public class Main {
             }else{
                 map.put(now,map.get(now)-1);
             }
-            while(section.size()==4){
-                result = Math.min(result,end - start + 1);
+            while(section.size()==m){
+                if(map.size()==m) result = Math.min(result,end - start + 1);
                 int erase = arr[start];
                 if(section.get(erase)==1){
                     section.remove(erase);
