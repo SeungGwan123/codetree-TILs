@@ -38,6 +38,9 @@ public class Main {
                 if(section.get(erase)==1){
                     section.remove(erase);
                 }else section.put(erase,section.get(erase)-1);
+                if(map.containsKey(erase)){
+                    map.put(erase,map.get(erase)+1);
+                }else map.put(erase,1);
                 start++;
             }
             end++;
