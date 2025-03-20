@@ -23,7 +23,7 @@ public class Main {
                 result = mid;
                 low = mid+1;
             }else high = mid-1;
-
+            if(result==0&&high==0) break;
             mid = (high+low)/2;
         }
         System.out.println(result);
