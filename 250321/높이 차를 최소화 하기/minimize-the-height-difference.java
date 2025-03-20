@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Main {
-    public static int result = 100;
+    public static int result = 500;
     public static int[][] dir = new int[][]{{1,0},{-1,0},{0,1},{0,-1}};
     public static int[][] board;
     public static int[][] visited;
