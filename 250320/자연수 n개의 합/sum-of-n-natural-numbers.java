@@ -5,7 +5,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         long s = sc.nextLong();
         long answer = 0;
-        long high = 100000000;
+        long high = 100000000000;
         long mid = high/2;
         long low = 0;
         while(low<high){
