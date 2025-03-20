@@ -31,11 +31,11 @@ public class Main {
         }
         long left_sum = 0;
         long right_sum = 0;
-        int left_count = 0;
-        int right_count = 0;
-        int[] left_num = new int[n];
-        int[] right_num = new int[n];
-        int[] arr_num = new int[n];
+        long left_count = 0;
+        long right_count = 0;
+        long[] left_num = new long[n];
+        long[] right_num = new long[n];
+        long[] arr_num = new long[n];
         for(int i=0;i<n;i++){
             left_sum+=arr[i];
             right_sum+=arr[n-1-i];
@@ -58,7 +58,7 @@ public class Main {
         //     System.out.print(right_num[i]+" ");
         // }
         // System.out.println();
-        int result = 0;
+        long result = 0;
         for(int i=1;i<n-2;i++){
             if(arr_num[i]==1){
                 //System.out.println(i);
