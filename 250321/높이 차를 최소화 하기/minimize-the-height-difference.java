@@ -7,13 +7,19 @@ public class Main {
     public static int[][] visited;
     public static int n;
     public static int m;
+    public static TreeSet<Integer> set = new TreeSet<>();
     public static void dfs(int x,int y,int high,int low){
         if(x==n-1&&y==m-1){
             //System.out.println(high-low);
             result = Math.min(result,high-low);
             return;
         }
-        if(high-low>=result) return;
+        if(set.contains(high)&&set.contains(low)) return;
+        if(high-low>=result) {
+            set.add(high);
+            set.add(low);
+            return;
+        }
         for(int d=0;d<4;d++){
             int a = x+dir[d][0];
             int b = y+dir[d][1];
@@ -21,6 +27,7 @@ public class Main {
             if(visited[a][b]==1) continue;
             visited[a][b]=1;
             dfs(a,b,Math.max(board[a][b],high),Math.min(board[a][b],low));
+            set.remove(board[a][b]);
             visited[a][b]=0;
         }
     }
