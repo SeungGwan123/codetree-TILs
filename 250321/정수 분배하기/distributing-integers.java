@@ -16,6 +16,10 @@ public class Main {
         while(low<=high){
             int count = 0;
             for(int i=0;i<n;i++){
+                if(mid==0){
+                    count=m;
+                    break;
+                }
                 count+=(arr[i]/mid);
                 if(count>=m) break;
             }
