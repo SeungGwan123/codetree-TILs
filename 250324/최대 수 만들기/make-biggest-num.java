@@ -11,7 +11,7 @@ public class Main {
         Arrays.sort(arr, new Comparator<String>() {
             @Override
             public int compare(String a,String b){
-                return Long.compare(Long.parseLong(b + a), Long.parseLong(a + b));
+                return (b+a).compareTo(a+b);
             }
         });
         String result = "";
