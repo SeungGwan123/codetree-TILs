@@ -20,7 +20,7 @@ public class Main {
                 int result = 0;
                 while(low<=high){
                     int mid = (low+high)/2;
-                    if(list.get(mid)>=now){
+                    if(list.get(mid)<=now){
                         low = mid+1;
                     }else {
                         high = mid - 1;
