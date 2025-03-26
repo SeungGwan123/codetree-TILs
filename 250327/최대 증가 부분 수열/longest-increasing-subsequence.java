@@ -22,8 +22,10 @@ public class Main {
                     int mid = (low+high)/2;
                     if(list.get(mid)>=now){
                         low = mid+1;
+                    }else {
+                        high = mid - 1;
                         result = mid;
-                    }else high = mid - 1;
+                    }
                 }
                 list.set(result,now);
             }
