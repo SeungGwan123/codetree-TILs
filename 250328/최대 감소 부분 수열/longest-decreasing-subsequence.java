@@ -21,7 +21,7 @@ public class Main {
                 int num = 0;
                 while(low<=high){
                     int mid = (low+high)/2;
-                    if(list.get(mid)>=now){
+                    if(list.get(mid)>now){
                         low = mid+1;
                         num = mid;
                     }else{
