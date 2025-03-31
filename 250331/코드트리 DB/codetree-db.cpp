@@ -109,7 +109,7 @@ int _delete(map<string, int>& name2val, map<int, string>& val2name, Node* root) 
         }
         cur = par;
     }
-    return 1;
+    return val;
 }
 
 string _rank(map<int, string>& val2name) {
