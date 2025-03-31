@@ -14,6 +14,7 @@ struct Leaf {
 struct Node {
     int min;
     int max;
+    int size = 0;
     long long sum;
     Node* left;
     Node* right;
@@ -36,6 +37,8 @@ void _init(map<string, int>& name2val, map<int, string>& val2name, Node* root) {
     root->left = NULL;
     root->right = NULL;
     root->leaf = NULL;
+    root->left_size = 0;
+    root->right_size = 0;
     name2val.clear();
     val2name.clear();
 }
@@ -52,6 +55,7 @@ int _insert(map<string, int>& name2val, map<int, string>& val2name, Node* root) 
     Leaf* leaf = new Leaf(val, name);
     while(cur->min!=cur->max) {
         cur->sum += val;
+        cur->size++;
         int mid = (cur->min + cur->max) / 2;
         if(val<=mid) {
             if(!cur->left) {
@@ -70,6 +74,7 @@ int _insert(map<string, int>& name2val, map<int, string>& val2name, Node* root) 
             cur = cur->right;
         }
     }
+    cur->size = 1;
     cur->sum = val;
     cur->leaf = leaf;
     return 1;
@@ -86,9 +91,14 @@ int _delete(map<string, int>& name2val, map<int, string>& val2name, Node* root) 
     Node* cur = root;
     while(cur->min!=cur->max) {
         cur->sum -= val;
+        cur->size--;
         int mid = (cur->min + cur->max) / 2;
-        if(val<=mid) cur = cur->left;
-        else cur = cur->right;
+        if(val<=mid) {
+            cur = cur->left;
+        }
+        else {
+            cur = cur->right;
+        }
     }
     cur->sum = 0;
     delete cur->leaf;
@@ -112,13 +122,21 @@ int _delete(map<string, int>& name2val, map<int, string>& val2name, Node* root) 
     return val;
 }
 
-string _rank(map<int, string>& val2name) {
+string _rank(Node* root) {
     int k;
     cin >> k;
-    if(val2name.size()<k) return "None";
-    auto it = val2name.begin();
-    advance(it, k-1);
-    return it->second;
+    if(root->size<k) return "None";
+    Node* cur = root;
+    while(cur->min!=cur->max) {
+        int left_size = (cur->left) ? cur->left->size : 0;
+
+        if(k<=left_size) cur = cur->left;
+        else {
+            k -= left_size;
+            cur = cur->right;
+        }
+    }
+    return cur->leaf->name;
 }
 
 long long _sum(Node* root) {
