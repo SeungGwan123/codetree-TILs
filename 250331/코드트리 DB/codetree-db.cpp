@@ -37,8 +37,7 @@ void _init(map<string, int>& name2val, map<int, string>& val2name, Node* root) {
     root->left = NULL;
     root->right = NULL;
     root->leaf = NULL;
-    root->left_size = 0;
-    root->right_size = 0;
+    root->size = 0;
     name2val.clear();
     val2name.clear();
 }
@@ -174,7 +173,7 @@ int main() {
         if(cmd=="init") _init(name2val, val2name, root);
         if(cmd=="insert") cout << _insert(name2val, val2name, root) << endl;
         if(cmd=="delete") cout << _delete(name2val, val2name, root) << endl;
-        if(cmd=="rank") cout << _rank(val2name) << endl;
+        if(cmd=="rank") cout << _rank(root) << endl;
         if(cmd=="sum") cout << _sum(root) << endl;
     }
     return 0;
