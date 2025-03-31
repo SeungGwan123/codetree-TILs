@@ -14,7 +14,7 @@ struct Leaf {
 struct Node {
     int min;
     int max;
-    int sum;
+    long long sum;
     Node* left;
     Node* right;
     Node* parents;
