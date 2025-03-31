@@ -54,7 +54,7 @@ int _insert(map<string, int>& name2val, map<int, string>& val2name, Node* root) 
         cur->sum += val;
         int mid = (cur->min + cur->max) / 2;
         if(val<=mid) {
-            if(cur->left==NULL) {
+            if(!cur->left) {
                 Node* node = new Node(cur->min, mid);
                 cur->left = node;
                 node->parents = cur;
@@ -62,7 +62,7 @@ int _insert(map<string, int>& name2val, map<int, string>& val2name, Node* root) 
             cur = cur->left;
         }
         else {
-            if(cur->right==NULL) {
+            if(!cur->right) {
                 Node* node = new Node(mid+1, cur->max);
                 cur->right = node;
                 node->parents = cur;
@@ -86,7 +86,8 @@ int _delete(map<string, int>& name2val, map<int, string>& val2name, Node* root) 
     Node* cur = root;
     while(cur->min!=cur->max) {
         cur->sum -= val;
-        if(cur->left->max>=val) cur = cur->left;
+        int mid = (cur->min + cur->max) / 2;
+        if(val<=mid) cur = cur->left;
         else cur = cur->right;
     }
     cur->sum = 0;
