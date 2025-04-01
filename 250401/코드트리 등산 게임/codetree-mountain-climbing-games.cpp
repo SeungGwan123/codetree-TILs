@@ -24,9 +24,11 @@ struct set_cmp {
 
 void addLIS(Mountain* m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain) {
     for(auto& [k, mountain] : lis2mountain) {
-        auto it = mountain.upper_bound(m);
-        if(it==mountain.end())
+        auto LIS_min = mountain.end();
+        LIS_min--;
+        if((*LIS_min)->height>=m->height)
             continue;
+        auto it = mountain.upper_bound(m);
         lis2mountain[k+1].insert(m);
         m->prev = *(--it);
         m->lis = k+1;
