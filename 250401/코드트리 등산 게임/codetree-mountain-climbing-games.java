@@ -71,7 +71,7 @@ public class Main {
                 if(lis.get(lis.size() - 1)==san){
                     lis.remove(lis.size() - 1);
                     if(!stack[lis.size()].isEmpty()){
-                        lis.add(stack[lis.size()].pop());
+                        lis= makeLIS(lis,stack[lis.size()].pop());
                     }
                 }
                 mountain.remove(mountain.size() - 1);
