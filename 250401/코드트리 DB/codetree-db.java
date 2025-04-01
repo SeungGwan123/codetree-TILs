@@ -102,29 +102,20 @@ public class Main {
         delete_handler(1,1000000000,findRoot(),name,value);
         System.out.println(value);
     }
-    public static void rank_handler(Segment node, Long size){
-        if(size==1){
+    public static void rank_handler(long left,long right, Segment node, Long size){
+        if(left==right){
             String name = pam.get(node.sum);
             System.out.println(name);
             return;
         }
+        long mid = (left+right)/2;
         if(node.left_node!=null){
             if(node.left_node.size<size){
-                rank_handler(node.right_node,size - node.left_node.size);
-            }else{
-                rank_handler(node.left_node,size);
-            }
+                rank_handler(mid+1,right,node.right_node,size-node.left_node.size);
+            }else rank_handler(left,mid,node.left_node,size);
         }else{
-            rank_handler(node.right_node,size);
+            rank_handler(mid+1,right,node.right_node,size);
         }
-        // long mid = (left+right)/2;
-        // if(node.left_node!=null){
-        //     if(node.left_node.size<size){
-        //         rank_handler(mid+1,right,node.right_node,size-node.left_node.size);
-        //     }else rank_handler(left,mid,node.left_node,size);
-        // }else{
-        //     rank_handler(mid+1,right,node.right_node,size);
-        // }
     }
     public static void rank(long k){
         Segment root = findRoot();
@@ -132,7 +123,7 @@ public class Main {
             System.out.println("None");
             return;
         }
-        rank_handler(findRoot(),k);
+        rank_handler(1,1000000000,findRoot(),k);
     }
     public static void sum_handler(long left,long right, Segment node,long sum,long k){
         if(left==right){
@@ -148,7 +139,6 @@ public class Main {
                 }else{
                     System.out.println(sum+node.left_node.sum);
                 }
-                return;
             }else{
                 if(node.left_node==null){
                     sum_handler(mid+1,right,node.right_node,sum,k);
@@ -159,11 +149,11 @@ public class Main {
         }else{
             if(node.left_node==null){
                 System.out.println(sum);
-                return;
             }else{
                 sum_handler(left,mid,node.left_node,sum,k);
             }
         }
+        return;
     }
     public static void sum(int k){
         
