@@ -60,9 +60,6 @@ void bigbang(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cmp>, grea
     for(int i=0; i<n; i++) {
         int h;
         cin >> h;
-        if(h==16||h==58) {
-            cout << " ";
-        }
         build_mountain(mountain, lis2mountain, h);
     }
 }
@@ -86,8 +83,6 @@ long long simulation(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cm
 }
 
 int main() {
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
     int Q;
     cin >> Q;
 
