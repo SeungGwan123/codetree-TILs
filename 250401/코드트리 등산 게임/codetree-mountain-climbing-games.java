@@ -59,10 +59,15 @@ public class Main {
                 }
                 else{
                     left = mid + 1;
+                    result = -2;
                 }
             }
-            if(result != -1){
+            if(result >= 0){
                 list.add(result,temp_san);
+                break;
+            }
+            if(result==-2){
+                list.add(temp_san);
                 break;
             }
         }
@@ -113,6 +118,19 @@ public class Main {
 
         for(int i=1;i<n;i++){
             String[] command = br.readLine().split(" ");
+
+            // System.out.print("lis : ");
+            // for(int j=0;j<lis.size();j++){
+            //     System.out.print(lis.get(j).san+" ");
+            // }
+            // System.out.println();
+            
+            // System.out.print("length : ");
+            // for(int j=0;j<length.size();j++){
+            //     System.out.print(length.get(j)+" ");
+            // }
+            // System.out.println();
+
             if(command[0].equals("200")){
                 int san = Integer.parseInt(command[1]);
                 mountain.add(san);
@@ -130,6 +148,7 @@ public class Main {
                 long result = length.get(cable) - 1;
 
                 result += lis.size();
+                //System.out.println(cable+" "+length.get(cable)+" "+lis.size()+" "+height.get(height.size() - 1));
                 System.out.println(1000000*result+height.get(height.size() - 1));
             }
         }
