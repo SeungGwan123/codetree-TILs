@@ -47,7 +47,7 @@ public class Main {
             int left = 0;
             int right = list.size() - 1;
             int result = -1;
-            if(list.get(list.size() - 1).san<temp_san.san){
+            if(list.size()==0||list.get(list.size() - 1).san<temp_san.san){
                 list.add(temp_san);
                 return list;
             }
