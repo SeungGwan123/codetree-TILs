@@ -14,6 +14,7 @@ public class Main {
     public static Stack<pair>[] stack = new Stack[50001];
     public static List<pair> makeLIS(List<pair> list,int san,int index){
         int last_san = list.get(list.size() - 1).san;
+        //System.out.println("last_san : "+last_san);
         if(last_san<san){
             list.add(new pair(san,index));
             height.add(san);
@@ -51,21 +52,30 @@ public class Main {
             }else if(list.get(mid).san>san){
                 right = mid -1;
             }else if(list.get(mid).san == san){
-                list.remove(mid);
+                
                 if(!stack[mid].isEmpty()){
-                    pair temp_san = stack[mid].pop();
-                    list = makeLIS(list,temp_san.san,temp_san.index);
-                    length.set(temp_san.index,length.get(length.size() - 1));
-                    height.set(temp_san.index,height.get(height.size() - 1));
-                    length.remove(length.size() - 1);
-                    height.remove(height.size() - 1);
-                    
+                    // System.out.print("lis : ");
                     // for(int i=0;i<list.size();i++){
-                    //     System.out.print(list.get(i)+" ");
+                    //     System.out.print(list.get(i).san+" ");
+                    // }
+                    // System.out.println();
+
+                    pair temp_san = stack[mid].pop();
+                    list.set(mid,temp_san);
+                    //list = makeLIS(list,temp_san.san,temp_san.index);
+                    //length.set(temp_san.index,length.get(length.size() - 1));
+                    //height.set(temp_san.index,height.get(height.size() - 1));
+                    //length.remove(length.size() - 1);
+                    //height.remove(height.size() - 1);
+                    //System.out.println("del "+temp_san.san+" "+temp_san.index);
+
+                    // System.out.print("lis : ");
+                    // for(int i=0;i<list.size();i++){
+                    //     System.out.print(list.get(i).san+" ");
                     // }
                     // System.out.println();
                     // System.out.println("length "+length.get(length.size() - 1));
-                }
+                }else list.remove(mid);
                 break;
             }
         }
@@ -98,6 +108,19 @@ public class Main {
 
         for(int i=1;i<n;i++){
             String[] command = br.readLine().split(" ");
+
+            // System.out.print("lis : ");
+            // for(int j=0;j<lis.size();j++){
+            //     System.out.print(lis.get(j).san+" ");
+            // }
+            // System.out.println();
+            
+            // System.out.print("length : ");
+            // for(int j=0;j<length.size();j++){
+            //     System.out.print(length.get(j)+" ");
+            // }
+            // System.out.println();
+
             if(command[0].equals("200")){
                 int san = Integer.parseInt(command[1]);
                 mountain.add(san);
@@ -126,7 +149,7 @@ public class Main {
                 long result = length.get(cable) - 1;
 
                 result += lis.size();
-                System.out.println(cable+" "+length.get(cable)+" "+lis.size()+" "+height.get(height.size() - 1));
+                //System.out.println(cable+" "+length.get(cable)+" "+lis.size()+" "+height.get(height.size() - 1));
                 System.out.println(1000000*result+height.get(height.size() - 1));
             }
         }
