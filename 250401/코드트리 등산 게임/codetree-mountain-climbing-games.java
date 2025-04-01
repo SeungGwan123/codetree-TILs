@@ -1,15 +1,22 @@
 import java.util.*;
 import java.io.*;
-
+class pair{
+    int san;
+    int index;
+    public pair(int san,int index){
+        this.san = san;
+        this.index = index;
+    }
+}
 public class Main {
     public static List<Integer> height = new ArrayList<>();
     public static List<Integer> length = new ArrayList<>();
-    public static Stack<Integer>[] stack = new Stack[50001];
-    public static List<Integer> makeLIS(List<Integer> list,int san){
-        int last_san = list.get(list.size() - 1);
+    public static Stack<pair>[] stack = new Stack[50001];
+    public static List<pair> makeLIS(List<pair> list,int san,int index){
+        int last_san = list.get(list.size() - 1).san;
         if(last_san<san){
-            list.add(san);
-            height.set(height.size() - 1,san);
+            list.add(new pair(san,index));
+            height.add(san);
             length.add(list.size());
             return list;
         }else{
@@ -19,35 +26,40 @@ public class Main {
             int max_height = san;
             while(left<=right){
                 int mid = (left+right)/2;
-                if(list.get(mid)>=san){
+                if(list.get(mid).san>=san){
                     right = mid - 1;
                     result = mid;
-                    max_height = Math.max(max_height, list.get(mid));
+                    max_height = Math.max(max_height, list.get(mid).san);
                 }else{
                     left = mid + 1;
                 }
             }
             stack[result].push(list.get(result));
-            list.set(result, san);
+            list.set(result, new pair(san,index));
             length.add(result + 1);
-            height.set(height.size() - 1,Math.max(max_height,height.get(height.size() - 1)));
+            height.add(Math.max(max_height,height.get(height.size() - 1)));
             return list;
         }
     }
-    public static List<Integer> delLIS(List<Integer> list, int san){
+    public static List<pair> delLIS(List<pair> list, int san){
         int left = 0;
         int right = list.size() - 1;
         while(left<=right){
             int mid = (left+right)/2;
-            if(list.get(mid)<san){
+            if(list.get(mid).san<san){
                 left = mid+1;
-            }else if(list.get(mid)>san){
+            }else if(list.get(mid).san>san){
                 right = mid -1;
-            }else if(list.get(mid) == san){
+            }else if(list.get(mid).san == san){
                 list.remove(mid);
                 if(!stack[mid].isEmpty()){
-                    list = makeLIS(list,stack[mid].pop());
+                    pair temp_san = stack[mid].pop();
+                    list = makeLIS(list,temp_san.san,temp_san.index);
+                    length.set(temp_san.index,length.get(length.size() - 1));
+                    height.set(temp_san.index,height.get(height.size() - 1));
                     length.remove(length.size() - 1);
+                    height.remove(height.size() - 1);
+                    
                     // for(int i=0;i<list.size();i++){
                     //     System.out.print(list.get(i)+" ");
                     // }
@@ -64,7 +76,7 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
 
         List<Integer> mountain = new ArrayList<>();
-        List<Integer> lis = new ArrayList<>();
+        List<pair> lis = new ArrayList<>();
         
         for(int i=0;i<50001;i++){
             stack[i] = new Stack<>();
@@ -76,11 +88,11 @@ public class Main {
             
             if(lis.size()==0){
                 height.add(san);
-                lis.add(san);
+                lis.add(new pair(san,i-2));
                 length.add(1);
             }else{
-                height.add(height.get(height.size() - 1));
-                lis = makeLIS(lis, san);
+                //height.add(height.get(height.size() - 1));
+                lis = makeLIS(lis, san,i-2);
             }
         }
 
@@ -89,8 +101,8 @@ public class Main {
             if(command[0].equals("200")){
                 int san = Integer.parseInt(command[1]);
                 mountain.add(san);
-                height.add(height.get(height.size() - 1));
-                lis = makeLIS(lis, san);
+                //height.add(height.get(height.size() - 1));
+                lis = makeLIS(lis, san,mountain.size());
                 // System.out.println("plus " + san);
                 // for(int j=0;j<lis.size();j++){
                 //     System.out.print(lis.get(j)+" ");
@@ -114,7 +126,7 @@ public class Main {
                 long result = length.get(cable) - 1;
 
                 result += lis.size();
-                //System.out.println(cable+" "+length.get(cable)+" "+lis.size()+" "+height.get(height.size() - 1));
+                System.out.println(cable+" "+length.get(cable)+" "+lis.size()+" "+height.get(height.size() - 1));
                 System.out.println(1000000*result+height.get(height.size() - 1));
             }
         }
