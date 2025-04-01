@@ -39,6 +39,8 @@ public class Main {
             if(node.right_node==null){
                 Segment right_node = new Segment();
                 right_node.parent = node;
+                right_node.left = mid+1;
+                right_node.right = right;
                 node.right_node = right_node;
             }
             insert_handler(mid+1,right,node.right_node,name,value);
@@ -46,6 +48,8 @@ public class Main {
             if(node.left_node==null){
                 Segment left_node = new Segment();
                 left_node.parent = node;
+                left_node.left = left;
+                left_node.right = mid;
                 node.left_node = left_node;
             }
             insert_handler(left,mid,node.left_node,name,value);
@@ -102,20 +106,29 @@ public class Main {
         delete_handler(1,1000000000,findRoot(),name,value);
         System.out.println(value);
     }
-    public static void rank_handler(long left,long right, Segment node, Long size){
-        if(left==right){
+    public static void rank_handler(Segment node, Long size){
+        if(size==1){
             String name = pam.get(node.sum);
             System.out.println(name);
             return;
         }
-        long mid = (left+right)/2;
         if(node.left_node!=null){
             if(node.left_node.size<size){
-                rank_handler(mid+1,right,node.right_node,size-node.left_node.size);
-            }else rank_handler(left,mid,node.left_node,size);
+                rank_handler(node.right_node,size - node.left_node.size);
+            }else{
+                rank_handler(node.left_node,size);
+            }
         }else{
-            rank_handler(mid+1,right,node.right_node,size);
+            rank_handler(node.right_node,size);
         }
+        // long mid = (left+right)/2;
+        // if(node.left_node!=null){
+        //     if(node.left_node.size<size){
+        //         rank_handler(mid+1,right,node.right_node,size-node.left_node.size);
+        //     }else rank_handler(left,mid,node.left_node,size);
+        // }else{
+        //     rank_handler(mid+1,right,node.right_node,size);
+        // }
     }
     public static void rank(long k){
         Segment root = findRoot();
@@ -123,7 +136,7 @@ public class Main {
             System.out.println("None");
             return;
         }
-        rank_handler(1,1000000000,findRoot(),k);
+        rank_handler(findRoot(),k);
     }
     public static void sum_handler(long left,long right, Segment node,long sum,long k){
         if(left==right){
