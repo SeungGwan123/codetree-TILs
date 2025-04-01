@@ -2,6 +2,7 @@
 #include <iostream>
 #include <map>
 #include <set>
+#include <cstdio>
 
 #define add_points 1000000
 using namespace std;
@@ -16,6 +17,7 @@ struct Mountain {
 
 struct set_cmp {
     bool operator()(const Mountain* m1, const Mountain* m2) const {
+        if (m1->height == m2->height) return m1->idx < m2->idx;
         return m1->height > m2->height;
     }
 };
@@ -39,7 +41,7 @@ void removeLIS(Mountain*m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2
         auto it = mountain.find(m);
         if(it==mountain.end())
             continue;
-        lis2mountain[k].erase(m);
+        lis2mountain[k].erase(it);
         if(lis2mountain[k].empty())
             lis2mountain.erase(k);
         return;
@@ -58,6 +60,9 @@ void bigbang(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cmp>, grea
     for(int i=0; i<n; i++) {
         int h;
         cin >> h;
+        if(h==16||h==58) {
+            cout << " ";
+        }
         build_mountain(mountain, lis2mountain, h);
     }
 }
@@ -81,6 +86,8 @@ long long simulation(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cm
 }
 
 int main() {
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     int Q;
     cin >> Q;
 
