@@ -22,10 +22,9 @@ struct set_cmp {
     }
 };
 
-int b_search(Mountain* m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain) {
+int b_search(Mountain* m, vector<set<Mountain*, set_cmp>>& lis2mountain) {
     if(lis2mountain.empty()) return 0;
-    auto it = lis2mountain.begin();
-    int right = (*it).first;
+    int right = lis2mountain.size()-1;
     int left = 0;
     while(left<=right) {
         int mid = (left+right)/2;
@@ -41,36 +40,40 @@ int b_search(Mountain* m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2m
     return left;
 }
 
-void addLIS(Mountain* m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain) {
+void addLIS(Mountain* m, vector<set<Mountain*, set_cmp>>& lis2mountain) {
     int k = b_search(m, lis2mountain);
+    if(lis2mountain.size()==k) {
+        lis2mountain.emplace_back(set<Mountain*, set_cmp> {m});
+    }
+    else {
+        lis2mountain[k].insert(m);
+    }
     if(k) {
         auto it = lis2mountain[k-1].upper_bound(m);
-        lis2mountain[k].insert(m);
         m->prev = *(--it);
         m->lis = k;
         return;
     }
     else {
-        lis2mountain[0].insert(m);
         m->lis = 0;
     }
 }
 
-void removeLIS(Mountain*m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain) {
+void removeLIS(Mountain* m, vector<set<Mountain*, set_cmp>>& lis2mountain) {
     int k = m->lis;
     lis2mountain[k].erase(m);
     if(lis2mountain[k].empty())
-        lis2mountain.erase(k);
+        lis2mountain.pop_back();
 }
 
-void build_mountain(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain, int h) {
+void build_mountain(vector<Mountain*>& mountain, vector<set<Mountain*, set_cmp>>& lis2mountain, int h) {
     int i = mountain.size();
     Mountain* m = new Mountain(h, i);
     addLIS(m, lis2mountain);
     mountain.push_back(m);
 }
 
-void bigbang(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain, int n) {
+void bigbang(vector<Mountain*>& mountain, vector<set<Mountain*, set_cmp>>& lis2mountain, int n) {
     for(int i=0; i<n; i++) {
         int h;
         cin >> h;
@@ -78,18 +81,18 @@ void bigbang(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cmp>, grea
     }
 }
 
-void earthquake(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain) {
+void earthquake(vector<Mountain*>& mountain, vector<set<Mountain*, set_cmp>>& lis2mountain) {
     Mountain* m = mountain[mountain.size()-1];
     removeLIS(m, lis2mountain);
     delete m;
     mountain.pop_back();
 }
 
-long long simulation(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain, int idx) {
+long long simulation(vector<Mountain*>& mountain, vector<set<Mountain*, set_cmp>>& lis2mountain, int idx) {
     long long score = 0;
     Mountain* m = mountain[idx];
-    int lis = (*lis2mountain.begin()).first;
-    int highest = (*(*lis2mountain.begin()).second.begin())->height;
+    int lis = lis2mountain.size()-1;
+    int highest = (*lis2mountain[lis].begin())->height;
     score += (m->lis + 1) * add_points;
     score += lis * add_points;
     score += highest;
@@ -101,7 +104,7 @@ int main() {
     cin >> Q;
 
     vector<Mountain*> mountain;
-    map<int, set<Mountain*, set_cmp>, greater<int>> lis2mountain;
+    vector<set<Mountain*, set_cmp>> lis2mountain;
     for(int i=0; i<Q; i++) {
         int cmd;
         cin >> cmd;
