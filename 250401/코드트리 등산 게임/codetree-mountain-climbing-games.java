@@ -47,7 +47,10 @@ public class Main {
             int left = 0;
             int right = list.size() - 1;
             int result = -1;
-            //boolean check = false;
+            if(list.get(list.size() - 1).san<temp_san.san){
+                list.add(temp_san);
+                return list;
+            }
             while(left<=right){
                 int mid = (left+right)/2;
                 if(list.get(mid).san>temp_san.san){
@@ -55,19 +58,16 @@ public class Main {
                     result = mid;
                 }else if(list.get(mid).san==temp_san.san){
                     result = -3;
+                    stack[mid].push(list.get(mid));
+                    list.set(mid,temp_san);
                     break;
                 }
                 else{
                     left = mid + 1;
-                    result = -2;
                 }
             }
             if(result >= 0){
                 list.add(result,temp_san);
-                break;
-            }
-            if(result==-2){
-                list.add(temp_san);
                 break;
             }
             if(result==-3) break;
