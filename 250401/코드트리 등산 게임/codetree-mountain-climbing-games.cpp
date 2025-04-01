@@ -22,33 +22,45 @@ struct set_cmp {
     }
 };
 
+int b_search(Mountain* m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain) {
+    if(lis2mountain.empty()) return 0;
+    auto it = lis2mountain.begin();
+    int right = (*it).first;
+    int left = 0;
+    while(left<=right) {
+        int mid = (left+right)/2;
+        auto lis_min_value = lis2mountain[mid].end(); lis_min_value--;
+        int min_value = (*lis_min_value)->height;
+        if(min_value>=m->height) {
+            right = mid-1;
+        }
+        else {
+            left = mid+1;
+        }
+    }
+    return left;
+}
+
 void addLIS(Mountain* m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain) {
-    for(auto& [k, mountain] : lis2mountain) {
-        auto LIS_min = mountain.end();
-        LIS_min--;
-        if((*LIS_min)->height>=m->height)
-            continue;
-        auto it = mountain.upper_bound(m);
-        lis2mountain[k+1].insert(m);
+    int k = b_search(m, lis2mountain);
+    if(k) {
+        auto it = lis2mountain[k-1].upper_bound(m);
+        lis2mountain[k].insert(m);
         m->prev = *(--it);
-        m->lis = k+1;
+        m->lis = k;
         return;
     }
-    lis2mountain[0].insert(m);
-    m->lis = 0;
+    else {
+        lis2mountain[0].insert(m);
+        m->lis = 0;
+    }
 }
 
 void removeLIS(Mountain*m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain) {
-    for(auto& [k, mountain] : lis2mountain) {
-        auto it = mountain.find(m);
-        if(it==mountain.end())
-            continue;
-        lis2mountain[k].erase(it);
-        if(lis2mountain[k].empty())
-            lis2mountain.erase(k);
-        return;
-    }
-    cout << "remove error" << endl;
+    int k = m->lis;
+    lis2mountain[k].erase(m);
+    if(lis2mountain[k].empty())
+        lis2mountain.erase(k);
 }
 
 void build_mountain(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain, int h) {
@@ -95,6 +107,10 @@ int main() {
         cin >> cmd;
         switch (cmd) {
         case 100:
+            if(i!=0) {
+                cout << "bigbang error" << endl;
+                return 0;
+            }
             int n;
             cin >> n;
             bigbang(mountain, lis2mountain, n);
@@ -110,7 +126,7 @@ int main() {
         case 400:
             int idx;
             cin >> idx;
-            cout << simulation(mountain, lis2mountain, idx-1) << '\n';
+            cout << simulation(mountain, lis2mountain, idx-1) << endl;
             break;
         default:
             cout << "cmd error" << endl;
