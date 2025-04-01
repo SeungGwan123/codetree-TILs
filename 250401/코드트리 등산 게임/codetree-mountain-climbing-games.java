@@ -54,7 +54,7 @@ public class Main {
                     right = mid - 1;
                     result = mid;
                 }else if(list.get(mid).san==temp_san.san){
-                    result = -1;
+                    result = -3;
                     break;
                 }
                 else{
@@ -70,6 +70,7 @@ public class Main {
                 list.add(temp_san);
                 break;
             }
+            if(result==-3) break;
         }
         return list;
     }
