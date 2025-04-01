@@ -47,23 +47,23 @@ public class Main {
             int left = 0;
             int right = list.size() - 1;
             int result = -1;
-            boolean check = false;
+            //boolean check = false;
             while(left<=right){
                 int mid = (left+right)/2;
                 if(list.get(mid).san>temp_san.san){
                     right = mid - 1;
                     result = mid;
                 }else if(list.get(mid).san==temp_san.san){
-                    check = true;
+                    result = -1;
                     break;
                 }
                 else{
                     left = mid + 1;
                 }
             }
-            if(check) break;
             if(result != -1){
                 list.add(result,temp_san);
+                break;
             }
         }
         return list;
