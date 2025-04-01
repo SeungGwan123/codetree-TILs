@@ -78,9 +78,10 @@ public class Main {
             }else if(list.get(mid).san>san){
                 right = mid -1;
             }else if(list.get(mid).san == san){
+                list.remove(mid);
                 if(!stack[mid].isEmpty()){
                     list = pushLIS(list,mid);
-                }else list.remove(mid);
+                }
                 break;
             }
         }
