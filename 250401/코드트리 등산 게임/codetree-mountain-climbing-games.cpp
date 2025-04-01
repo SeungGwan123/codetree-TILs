@@ -39,10 +39,16 @@ void addLIS(Mountain* m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mo
 }
 
 void removeLIS(Mountain*m, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain) {
-    int k = m->lis;
-    lis2mountain[k].erase(m);
-    if(lis2mountain[k].empty())
-        lis2mountain.erase(k);
+    for(auto& [k, mountain] : lis2mountain) {
+        auto it = mountain.find(m);
+        if(it==mountain.end())
+            continue;
+        lis2mountain[k].erase(it);
+        if(lis2mountain[k].empty())
+            lis2mountain.erase(k);
+        return;
+    }
+    cout << "remove error" << endl;
 }
 
 void build_mountain(vector<Mountain*>& mountain, map<int, set<Mountain*, set_cmp>, greater<int>>& lis2mountain, int h) {
@@ -104,7 +110,7 @@ int main() {
         case 400:
             int idx;
             cin >> idx;
-            cout << simulation(mountain, lis2mountain, idx-1) << endl;
+            cout << simulation(mountain, lis2mountain, idx-1) << '\n';
             break;
         default:
             cout << "cmd error" << endl;
