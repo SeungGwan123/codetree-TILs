@@ -34,6 +34,31 @@ public class Main {
             return list;
         }
     }
+    public static List<Integer> delLIS(List<Integer> list, int san){
+        int left = 0;
+        int right = list.size() - 1;
+        while(left<=right){
+            int mid = (left+right)/2;
+            if(list.get(mid)<san){
+                left = mid+1;
+            }else if(list.get(mid)>san){
+                right = mid -1;
+            }else if(list.get(mid) == san){
+                list.remove(mid);
+                if(!stack[mid].isEmpty()){
+                    list = makeLIS(list,stack[mid].pop());
+                    length.remove(length.size() - 1);
+                    // for(int i=0;i<list.size();i++){
+                    //     System.out.print(list.get(i)+" ");
+                    // }
+                    // System.out.println();
+                    // System.out.println("length "+length.get(length.size() - 1));
+                }
+                break;
+            }
+        }
+        return list;
+    }
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
@@ -66,22 +91,30 @@ public class Main {
                 mountain.add(san);
                 height.add(height.get(height.size() - 1));
                 lis = makeLIS(lis, san);
+                // System.out.println("plus " + san);
+                // for(int j=0;j<lis.size();j++){
+                //     System.out.print(lis.get(j)+" ");
+                // }
+                // System.out.println();
+                // System.out.println("length ");
+                // for(int j=0;j<length.size();j++){
+                //     System.out.print(length.get(j)+" ");
+                // }
+                // System.out.println();
             }else if(command[0].equals("300")){
                 int san = mountain.get(mountain.size() - 1);
-                if(lis.get(lis.size() - 1)==san){
-                    lis.remove(lis.size() - 1);
-                    if(!stack[lis.size()].isEmpty()){
-                        lis= makeLIS(lis,stack[lis.size()].pop());
-                    }
-                }
+                
                 mountain.remove(mountain.size() - 1);
                 height.remove(height.size() - 1);
                 length.remove(length.size() - 1);
+
+                lis = delLIS(lis,san);
             }else{
                 int cable = Integer.parseInt(command[1]) - 1;
                 long result = length.get(cable) - 1;
 
                 result += lis.size();
+                //System.out.println(cable+" "+length.get(cable)+" "+lis.size()+" "+height.get(height.size() - 1));
                 System.out.println(1000000*result+height.get(height.size() - 1));
             }
         }
