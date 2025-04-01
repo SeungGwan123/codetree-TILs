@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 class Segment{
     long left = 1;
     long right = 1000000000;
@@ -106,29 +107,20 @@ public class Main {
         delete_handler(1,1000000000,findRoot(),name,value);
         System.out.println(value);
     }
-    public static void rank_handler(Segment node, Long size){
-        if(node.left==node.right){
+    public static void rank_handler(long left,long right, Segment node, Long size){
+        if(left==right){
             String name = pam.get(node.sum);
             System.out.println(name);
             return;
         }
+        long mid = (left+right)/2;
         if(node.left_node!=null){
             if(node.left_node.size<size){
-                rank_handler(node.right_node,size - node.left_node.size);
-            }else{
-                rank_handler(node.left_node,size);
-            }
+                rank_handler(mid+1,right,node.right_node,size-node.left_node.size);
+            }else rank_handler(left,mid,node.left_node,size);
         }else{
-            rank_handler(node.right_node,size);
+            rank_handler(mid+1,right,node.right_node,size);
         }
-        // long mid = (left+right)/2;
-        // if(node.left_node!=null){
-        //     if(node.left_node.size<size){
-        //         rank_handler(mid+1,right,node.right_node,size-node.left_node.size);
-        //     }else rank_handler(left,mid,node.left_node,size);
-        // }else{
-        //     rank_handler(mid+1,right,node.right_node,size);
-        // }
     }
     public static void rank(long k){
         Segment root = findRoot();
@@ -136,7 +128,7 @@ public class Main {
             System.out.println("None");
             return;
         }
-        rank_handler(findRoot(),k);
+        rank_handler(1,1000000000,findRoot(),k);
     }
     public static void sum_handler(long left,long right, Segment node,long sum,long k){
         if(left==right){
@@ -171,23 +163,21 @@ public class Main {
     public static void sum(int k){
         
     }
-    public static void main(String[] args) {
-        
-        Scanner sc = new Scanner(System.in);
-        int n = Integer.parseInt(sc.nextLine());
-        
-        for(int i=0;i<n;i++){
-            String[] command = sc.nextLine().split(" ");
-            if(command[0].equals("init")){
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        for (int i = 0; i < n; i++) {
+            String[] command = br.readLine().split(" ");
+            if (command[0].equals("init")) {
                 init();
-            }else if(command[0].equals("insert")){
-                insert(command[1],Long.parseLong(command[2]));
-            }else if(command[0].equals("delete")){
+            } else if (command[0].equals("insert")) {
+                insert(command[1], Long.parseLong(command[2]));
+            } else if (command[0].equals("delete")) {
                 delete(command[1]);
-            }else if(command[0].equals("rank")){
+            } else if (command[0].equals("rank")) {
                 rank(Long.parseLong(command[1]));
-            }else{
-                sum_handler(1,1000000000,findRoot(),0,Long.parseLong(command[1]));
+            } else {
+                sum_handler(1, 1000000000, findRoot(), 0, Long.parseLong(command[1]));
             }
         }
     }
