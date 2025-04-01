@@ -107,7 +107,7 @@ public class Main {
         System.out.println(value);
     }
     public static void rank_handler(Segment node, Long size){
-        if(size==1){
+        if(node.left==node.right){
             String name = pam.get(node.sum);
             System.out.println(name);
             return;
