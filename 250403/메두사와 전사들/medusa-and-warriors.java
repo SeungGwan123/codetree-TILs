@@ -94,6 +94,7 @@ public class Main {
         for(int d=0;d<4;d++){
             Set<Integer> set = new HashSet<>();
             List<Integer[]> list = new ArrayList<>();
+            List<Integer> diag = new ArrayList<>();
             int num = 0;
             int start;
             int end;
@@ -121,6 +122,10 @@ public class Main {
                             //System.out.println(line+" "+i);
                             num+=soldier_num[line][i];
                             set.add(i);
+                            if(i!=monster[1]){
+                                if(i<monster[1]) diag.add(-i);
+                                else diag.add(i);
+                            }
                             list.add(new Integer[]{line,i});
                         }
                     }
@@ -137,6 +142,10 @@ public class Main {
                             //System.out.println(i+" "+line);
                             num+=soldier_num[i][line];
                             set.add(i);
+                            if(i!=monster[0]){
+                                if(i<monster[1]) diag.add(-i);
+                                else diag.add(i);
+                            }
                             list.add(new Integer[]{i,line});
                         }
                     }
@@ -146,7 +155,19 @@ public class Main {
                         line--;
                     }else line++;
                 }
+                for(int i=0;i<diag.size();i++){
+                    int now = diag.get(i);
+                    if(now==0||now==n-1) continue;
+                    if(now<0){
+                        diag.set(i,now-1);
+                        set.add(-(now-1));
+                    }else{
+                        diag.set(i,now+1);
+                        set.add(now+1);
+                    }
+                }
             }
+            //System.out.println(list.size());
             if(num>sol){
                 sol = num;
                 sol_list = list;
@@ -186,6 +207,7 @@ public class Main {
                 soldier[i][0] = a;
                 soldier[i][1] = b;
                 if(soldier_loc[a][b]!=-1) soldier_loc[a][b] = 1;
+                //System.out.println(x+" "+y+" "+a+" "+b);
                 soldier_loc[x][y] = 0;
                 soldier_num[x][y]--;
                 soldier_num[a][b]++;
@@ -209,6 +231,7 @@ public class Main {
                 soldier[i][0] = a;
                 soldier[i][1] = b;
                 if(soldier_loc[a][b]!=-1) soldier_loc[a][b] = 1;
+                //System.out.println(x+" "+y+" "+a+" "+b);
                 soldier_loc[x][y] = 0;
                 soldier_num[x][y]--;
                 soldier_num[a][b]++;
