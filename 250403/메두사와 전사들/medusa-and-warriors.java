@@ -122,6 +122,7 @@ public class Main {
                             //System.out.println(line+" "+i);
                             num+=soldier_num[line][i];
                             set.add(i);
+                            //System.out.println(i);
                             if(i!=monster[1]){
                                 if(i<monster[1]) diag.add(-i);
                                 else diag.add(i);
@@ -159,8 +160,8 @@ public class Main {
                     int now = diag.get(i);
                     if(now==0||now==n-1) continue;
                     if(now<0){
-                        diag.set(i,now-1);
-                        set.add(-(now-1));
+                        diag.set(i,now+1);
+                        set.add(-(now+1));
                     }else{
                         diag.set(i,now+1);
                         set.add(now+1);
@@ -190,6 +191,14 @@ public class Main {
         soldier_num[x][y]--;
     }
     public static void moveSolider(){
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<n;j++){
+        //         System.out.print(monsterSight[monsterSightNum][i][j]+" ");
+        //     }
+        //     System.out.println();
+        // }
+        // System.out.println();
+
         Set<Integer[]> set = new HashSet<>();
         for(int i=0;i<soldier.length;i++){
             int x = soldier[i][0];
@@ -263,6 +272,15 @@ public class Main {
     }
     public static void start(){
         result = new int[3];
+
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<n;j++){
+        //         System.out.print(soldier_num[i][j]+" ");
+        //     }
+        //     System.out.println();
+        // }
+        // System.out.println();
+
         //move
         monsterMove();
         //location check
