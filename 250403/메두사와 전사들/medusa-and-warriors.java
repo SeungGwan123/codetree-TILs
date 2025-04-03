@@ -1,6 +1,15 @@
 import java.util.*;
 import java.io.*;
-
+class tuple{
+    int x;
+    int y;
+    List<Integer[]> list;
+    public tuple(int x,int y,List<Integer[]> list){
+        this.x = x;
+        this.y = y;
+        this.list = new ArrayList<>(list);
+    }
+}
 public class Main {
     public static int n;
     public static int[][] soldier;
@@ -38,26 +47,33 @@ public class Main {
     }
 
     public static void house2park(int x,int y,List<Integer[]> list){
-        if(list.size()>=monsterMinRoute) return;
-        if(x==park[0]&&y==park[1]){
-            if(list.size()<monsterMinRoute){
-                monsterRoute = new int[n][n][4];
-                monsterMinRoute = list.size();
+        Queue<tuple> queue = new LinkedList<>();
+        queue.add(new tuple(x,y,list));
+        while(!queue.isEmpty()){
+            tuple now = queue.poll();
+            x = now.x;
+            y = now.y;
+            list = now.list;
+            if(list.size()>=monsterMinRoute) continue;
+            if(x==park[0]&&y==park[1]){
+                if(list.size()<monsterMinRoute){
+                    monsterRoute = new int[n][n][4];
+                    monsterMinRoute = list.size();
+                }
+                saveRoute(list);
+                monsterCheck = true;
+                continue;
             }
-            saveRoute(list);
-            monsterCheck = true;
-            return;
-        }
-        for(int d=0;d<4;d++){
-            int a = x+dir[d][0];
-            int b = y+dir[d][1];
-            if(a<0||b<0||a>=n||b>=n) continue;
-            if(visited[a][b]==1 || board[a][b]==1) continue;
-            list.add(new Integer[]{a,b});
-            visited[a][b] = 1;
-            house2park(a,b,list);
-            visited[a][b] = 0;
-            list.remove(list.size() - 1);
+            for(int d=0;d<4;d++){
+                int a = x+dir[d][0];
+                int b = y+dir[d][1];
+                if(a<0||b<0||a>=n||b>=n) continue;
+                if(visited[a][b]==1 || board[a][b]==1) continue;
+                list.add(new Integer[]{a,b});
+                visited[a][b] = 1;
+                queue.add(new tuple(a,b,list));
+                list.remove(list.size() - 1);
+            }
         }
     }
     public static void killSolider(){
