@@ -144,7 +144,8 @@ public class Main {
                             num+=soldier_num[i][line];
                             set.add(i);
                             if(i!=monster[0]){
-                                if(i<monster[1]) diag.add(-i);
+                                //System.out.println(i+" "+start+" "+end);
+                                if(i<monster[0]) diag.add(-i);
                                 else diag.add(i);
                             }
                             list.add(new Integer[]{i,line});
@@ -194,6 +195,14 @@ public class Main {
         // for(int i=0;i<n;i++){
         //     for(int j=0;j<n;j++){
         //         System.out.print(monsterSight[monsterSightNum][i][j]+" ");
+        //     }
+        //     System.out.println();
+        // }
+        // System.out.println();
+
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<n;j++){
+        //         System.out.print(soldier_num[i][j]+" ");
         //     }
         //     System.out.println();
         // }
