@@ -9,7 +9,7 @@ public class Main {
         int[] change = new int[m+1];
         for (int i = 0; i < n; i++){
             coin[i] = sc.nextInt();
-            change[coin[i]] = 1;
+            if(coin[i]<=m) change[coin[i]] = 1;
         }
         for(int i=0;i<n;i++){
             for(int j=coin[i]+1;j<=m;j++){
