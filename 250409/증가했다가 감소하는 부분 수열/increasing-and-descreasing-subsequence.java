@@ -59,7 +59,9 @@ public class Main {
         // System.out.println();
 
         for(int i=0;i<n;i++){
+            answer = Math.max(plus[i],answer);
             for(int j=i+1;j<n;j++){
+                answer = Math.max(minus[j],answer);
                 if(arr[i]>arr[j]){
                     answer = Math.max(plus[i]+minus[j],answer);
                 }
